@@ -27,11 +27,23 @@ getData();
 function createCards(displayName, uuid, displayIcon, wallpaper){
     const container = document.querySelector(".container");
     container.insertAdjacentHTML("beforeend",
-        `<div class="card">
-            <img src="${displayIcon}" alt="${displayName}">
-            <h1>${displayName}</h1>
-            <h2>UUID: ${uuid}</h2>
-            <h3>${wallpaper}</h3>
+        `<div class="card bg-base-100 w-96 shadow-xl">
+            <figure class="px-10 pt-10">
+                <div class="bg-cover bg-center p-6 rounded-xl" style="background: red;">
+                    <img
+                    src="${displayIcon}"
+                    alt="${displayName}"
+                    class="rounded-xl" />
+                </div>
+            </figure>
+            <div class="card-body items-center text-center">
+                <h2 class="card-title">${displayName}</h2>
+                <p>${uuid}</p>
+                <p>${wallpaper}</p>
+                <div class="card-actions">
+                    <button class="btn btn-primary">Buy Now</button>
+                </div>
+            </div>
         </div>`
     );
 }
