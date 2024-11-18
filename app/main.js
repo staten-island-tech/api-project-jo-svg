@@ -1,37 +1,37 @@
 import "./style.css";
+document.querySelector('.container').innerHTML = '';
+
+
 async function getData(){
     try {
-        const response = await fetch("https://api.waifu.im/kamisato-ayaka");
+        const response = await fetch("https://valorant-api.com/v1/weapons/skins");
+        //this is valorant weapon skins
         if (response.status != 200){
-            throw new Error(response);
+            throw new Error('failed to catch data');
         }
         else{
-            const data = await response.json();
-            document.querySelector('h1').textContent = data.name
-            console.log(data.name)
+            const jsonResponse = await response.json();
+            const info = jsonResponse.data;
+            info.forEach((skin)=>{
+                createCards(skin.displayName, skin.uuid, skin.displayIcon || "https://via.placeholder.com/150", skin.wallpaper || "No wallpaper available");
+                //if the skin doesnt have an image it willl put a placehoklder image, ask whalen if he wants a image or na
+                //document.querySelector('h1').textContent = skin.displayName;
+            }) 
         }
     } catch (error) {
         console.log(error);
-        alert("yesh")
+        alert("no work")
     }
 }
-
 getData();
-
-function createSongCards(){
-    document.querySelector('.container').innerHTML = '';
+function createCards(displayName, uuid, displayIcon, wallpaper){
     const container = document.querySelector(".container");
-    yes.forEach((song)=>{
-        const { title, artist, genre, price, releaseDate: release, imageUrl: img, altText: des } = song;
-        container.insertAdjacentHTML("beforeend",
-            `<div class="card">
-                <img src="${img}" alt="${des}">
-                <h1>${title}</h1>
-                <h2>${artist}</h2>
-                <h3>${genre}</h3>
-                <p>${release}</p>
-                <p class="price">Cost: ${price}</p>
-            </div>`
-        );
-    });
+    container.insertAdjacentHTML("beforeend",
+        `<div class="card">
+            <img src="${displayIcon}" alt="${displayName}">
+            <h1>${displayName}</h1>
+            <h2>UUID: ${uuid}</h2>
+            <h3>${wallpaper}</h3>
+        </div>`
+    );
 }
