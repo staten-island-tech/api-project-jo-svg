@@ -14,16 +14,11 @@ async function getData(){
             const info = jsonResponse.data;
             
             info.forEach((weapon)=>{
-                let cost = 'no cost';
-                let category = 'idk';
-                if (weapon.shopData && weapon.shopData.category) {
-                    cost = weapon.shopData.cost;
-                    category = weapon.shopData.category || category;
-                }
-                
-                console.log(`Category: ${category}`);
+                const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
+                const category = weapon.shopData ? weapon.shopData.category : 'no cat';
+             
                 /* console.log(weapon.shopData.category); */
-                createCards(weapon.displayName,cost, weapon.displayIcon , weapon.shopData.category);
+                createCards(weapon.displayName,cost, weapon.displayIcon , category);
                 //if the skin doesnt have an image it willl put a placehoklder image, ask whalen if he wants a image or na
                 //document.querySelector('h1').textContent = skin.displayName;
             }) 
