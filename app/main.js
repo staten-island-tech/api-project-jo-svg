@@ -14,8 +14,16 @@ async function getData(){
             const info = jsonResponse.data;
             
             info.forEach((weapon)=>{
-                console.log(weapon.shopData.cost);
-                createCards(weapon.displayName, weapon.shopData.cost, weapon.displayIcon, weapon.shopData.category);
+                let cost = 'no cost';
+                let category = 'idk';
+                if (weapon.shopData && weapon.shopData.category) {
+                    cost = weapon.shopData.cost;
+                    category = weapon.shopData.category || category;
+                }
+                
+                console.log(`Category: ${category}`);
+                /* console.log(weapon.shopData.category); */
+                createCards(weapon.displayName,cost, weapon.displayIcon , weapon.shopData.category);
                 //if the skin doesnt have an image it willl put a placehoklder image, ask whalen if he wants a image or na
                 //document.querySelector('h1').textContent = skin.displayName;
             }) 
