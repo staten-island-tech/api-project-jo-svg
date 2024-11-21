@@ -35,13 +35,13 @@ getData();
 function createCards(displayName, cost, displayIcon, type){
     const container = document.querySelector(".container");
     container.insertAdjacentHTML("beforeend",
-        `<div class="card bg-base-100 w-96 shadow-xl">
+        `<div class="card bg-base-100 w-96 shadow-xl h-96">
             <figure class="px-10 pt-10">
-                <div class="bg-cover bg-center p-6 rounded-xl" style="background: red;">
+                <div class="p-6 rounded-xl" style="background: red; display: flex; justify-content: center; align-items: center; height: 100%;">
                     <img
-                    src="${displayIcon}"
-                    alt="${displayName}"
-                    class="rounded-xl" />
+                        src="${displayIcon}"
+                        alt="${displayName}"
+                        class="rounded-xl object-contain max-h-full max-w-full" />
                 </div>
             </figure>
             <div class="card-body items-center text-center">
@@ -49,9 +49,24 @@ function createCards(displayName, cost, displayIcon, type){
                 <p>Cost: ${cost}</p>
                 <p>${type}</p>
                 <div class="card-actions">
-                    <button class="btn btn-primary">Buy Now</button>
+                    <button class="btn btn-primary">Learn More</button>
                 </div>
             </div>
         </div>`
     );
 }
+openCard();
+function openCard(){
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', (event)=>{
+            const card = event.target.closest('.card');
+            const title = card.querySelector('.card-title').textContent;
+            //gets the target closest to the event aka wtv button u click 
+            console.log(title);
+        })
+    });
+}
+
+setTimeout(openCard, 1000);
+//ensures that the DOM thing loads and then you can call the buttons 
