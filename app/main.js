@@ -1,6 +1,6 @@
 import "./style.css";
 document.querySelector('.container').innerHTML = '';
-
+let info = [];
 
 async function getData(){
     try {
@@ -11,7 +11,7 @@ async function getData(){
         }
         else{
             const jsonResponse = await response.json();
-            const info = jsonResponse.data;
+            info = jsonResponse.data;
             
             info.forEach((weapon)=>{
                 const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
@@ -31,7 +31,7 @@ async function getData(){
 
 //do weapons and then for each weapon you have the skins avaiuble wrdd 
 
-getData();
+
 function createCards(displayName, cost, displayIcon, type){
     const container = document.querySelector(".container");
     container.insertAdjacentHTML("beforeend",
@@ -55,18 +55,36 @@ function createCards(displayName, cost, displayIcon, type){
         </div>`
     );
 }
-openCard();
-function openCard(){
-    const buttons = document.querySelectorAll('.btn');
-    buttons.forEach(btn => {
-        btn.addEventListener('click', (event)=>{
-            const card = event.target.closest('.card');
-            const title = card.querySelector('.card-title').textContent;
-            //gets the target closest to the event aka wtv button u click 
-            console.log(title);
-        })
-    });
+document.querySelector(".container").addEventListener("click", (event) => {
+    if (event.target.classList.contains("btn")) {
+        const card = event.target.closest(".card");
+        const title = card.querySelector(".card-title").textContent;
+        document.querySelector(".container").innerHTML = ""; // Clear container
+        weaponData(title);
+    }
+});
+async function weaponData(title) {
+    const weapon = info.find((w) => w.displayName === title);
+    if (weapon) {
+        createOpenCard();
+        weapon.skins.forEach(createSkinPart);
+    }
+}
+function createOpenCard() {
+    const container = document.querySelector(".container");
+    container.insertAdjacentHTML("beforeend", `
+        <div class="carousel carousel-center bg-neutral rounded-box max-w-md space-x-4 p-4"></div>
+    `);
+}
+function createSkinPart(skin) {
+    const carousel = document.querySelector(".carousel");
+    const skinIcon = skin.displayIcon || "https://via.placeholder.com/150";
+    carousel.insertAdjacentHTML("beforeend", `
+        <div class="carousel-item">
+            <img src="${skinIcon}" alt="${skin.displayName}" class="rounded-box" />
+        </div>
+    `);
 }
 
-setTimeout(openCard, 1000);
-//ensures that the DOM thing loads and then you can call the buttons 
+
+getData();
