@@ -2,17 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background: green;
-}
-
-.container{
-    row-gap: 10px;
-    display: flex;
-    width: 90%;
-    margin: 2rem auto;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    column-gap: 10px;
-  }

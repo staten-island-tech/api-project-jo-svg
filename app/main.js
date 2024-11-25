@@ -95,9 +95,7 @@ function createSkinPart(skin, slideId, prevSlideId, nextSlideId, weapon) {
     const backgroundColor = "lightblue"; 
 
     carousel.insertAdjacentHTML("beforeend", `
-        <
-        
-        div id="${slideId}" class="carousel-item relative flex justify-center items-center w-full" style="background-color: ${backgroundColor};">
+        <div id="${slideId}" class="carousel-item relative flex justify-center items-center w-full" style="background-color: ${backgroundColor};">
             <div class="flex justify-center items-center h-96">
                 <img
                     src="${skinIcon}"
