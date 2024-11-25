@@ -16,12 +16,9 @@ async function getData(){
             info.forEach((weapon)=>{
                 const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
                 const category = weapon.shopData ? weapon.shopData.category : 'no cat';
-             
-                /* console.log(weapon.shopData.category); */
                 createCards(weapon.displayName,cost, weapon.displayIcon , category);
-                //if the skin doesnt have an image it willl put a placehoklder image, ask whalen if he wants a image or na
-                //document.querySelector('h1').textContent = skin.displayName;
             }) 
+            
         }
     } catch (error) {
         console.log(error);
@@ -55,12 +52,19 @@ function createCards(displayName, cost, displayIcon, type){
         </div>`
     );
 }
-document.querySelector(".container").addEventListener("click", (event) => {
+document.addEventListener("click", (event) => {
     if (event.target.classList.contains("btn")) {
         const card = event.target.closest(".card");
-        const title = card.querySelector(".card-title").textContent;
-        document.querySelector(".container").innerHTML = ""; // Clear container
-        weaponData(title);
+        if (card) {
+            const titleElement = card.querySelector(".card-title");
+            if (titleElement) {
+                const title = titleElement.textContent;
+                document.querySelector(".container").innerHTML = "";
+                weaponData(title);
+            }
+        } else {
+            console.log("Card not found!");
+        }
     }
 });
 async function weaponData(title) {
@@ -111,5 +115,6 @@ function createSkinPart(skin, slideId, prevSlideId, nextSlideId) {
 
 
 
-
 getData();
+
+weaponData();
