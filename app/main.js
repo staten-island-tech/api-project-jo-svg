@@ -16,7 +16,7 @@ async function getData(){
             info.forEach((weapon)=>{
                 const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
                 const category = weapon.shopData ? weapon.shopData.category : 'no cat';
-                createCards(weapon.displayName,cost, weapon.displayIcon , category);
+                createing(weapon.displayName, cost, weapon.displayIcon);
             }) 
             
         }
@@ -52,13 +52,39 @@ function createCards(displayName, cost, displayIcon, type){
         </div>`
     );
 }
+
+function createing(displayName,cost , displayIcon){
+    const container = document.querySelector(".container");
+    container.insertAdjacentHTML("beforeend",
+        `<div class="card bg-base-100 w-96 shadow-xl h-32 flex cursor-pointer rounded-none overflow-x-hidden rounded-tl-lg border-2 border-black">
+          
+            <div class="picture absolute h-24 z-10">
+                <img
+                    src="${displayIcon}"
+                    alt="${displayName}"
+                    class="object-contain max-h-full max-w-full" />
+            </div>
+            <div class="w-20 h-20 absolute bottom-0 " style="background-color: rgb(255, 70, 86);">
+                <h3 class="z-0">${cost}</h3>
+            </div>
+            <div class="cardText w-full flex items-center justify-center mt-auto">
+                <h2 class="card-title text-center text-gray-200">${displayName.toUpperCase()}</h2>
+            </div>
+        </div>
+
+        `
+    );
+}
+function capitalizeFirstLetter(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}
 document.addEventListener("click", (event) => {
-    if (event.target.classList.contains("btn")) {
+    if (event.target.closest(".card")) {
         const card = event.target.closest(".card");
         if (card) {
             const titleElement = card.querySelector(".card-title");
             if (titleElement) {
-                const title = titleElement.textContent;
+                const title = capitalizeFirstLetter(titleElement.textContent);
                 document.querySelector(".container").innerHTML = "";
                 weaponData(title);
             }
@@ -67,6 +93,7 @@ document.addEventListener("click", (event) => {
         }
     }
 });
+
 async function weaponData(title) {
     const weapon = info.find((w) => w.displayName === title);
     if (weapon) {
