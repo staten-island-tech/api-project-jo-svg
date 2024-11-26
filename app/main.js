@@ -52,7 +52,23 @@ function createCards(displayName, cost, displayIcon, type){
         </div>`
     );
 }
+function filtering(){
+    const join = document.querySelector('.join');
+    const options = document.querySelectorAll('.join-item');
+    
 
+    options.forEach(option => {
+        option.addEventListener('click', ()=>{
+            let topic = capitalizeFirstLetter(option.ariaLabel);
+            console.log(topic);
+            
+            
+           
+        })
+        //put all the cards with ths cat
+    });
+}
+filtering();
 function createing(displayName,cost , displayIcon){
     const container = document.querySelector(".container");
     container.insertAdjacentHTML("beforeend",
@@ -76,7 +92,13 @@ function createing(displayName,cost , displayIcon){
     );
 }
 function capitalizeFirstLetter(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    return word
+    .split(' ')
+    .map(word=>word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+    //the split thing splits it by the space
+    //charAt gets the first letter of the word
+    //slice separates the rest after the first letter n converts it to all lowercase
 }
 document.addEventListener("click", (event) => {
     if (event.target.closest(".card")) {
