@@ -12,12 +12,12 @@ async function getData(){
         else{
             const jsonResponse = await response.json();
             info = jsonResponse.data;
-            
             info.forEach((weapon)=>{
                 const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
                 const category = weapon.shopData ? weapon.shopData.category : 'no cat';
                 createing(weapon.displayName, cost, weapon.displayIcon);
-            }) 
+            });
+            filtering();
             
         }
     } catch (error) {
@@ -55,20 +55,35 @@ function createCards(displayName, cost, displayIcon, type){
 function filtering(){
     const join = document.querySelector('.join');
     const options = document.querySelectorAll('.join-item');
-    
+   
 
     options.forEach(option => {
         option.addEventListener('click', ()=>{
             let topic = capitalizeFirstLetter(option.ariaLabel);
             console.log(topic);
             
+            if (topic === 'All'){
+                info.forEach((weapon)=>{
+                    document.querySelector('.container').innerHTML = '';
+                    const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
+                    const category = weapon.shopData ? weapon.shopData.category : 'no cat';
+                    createing(weapon.displayName, cost, weapon.displayIcon);
+                }) 
+            }
             
-           
+            info.forEach(weapon => {
+                document.querySelector('.container').innerHTML = '';
+                const category = weapon.shopData ? weapon.shopData.category : 'no cat'; 
+                if (category === topic){
+                    const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
+                    createing(weapon.displayName, cost, weapon.displayIcon);
+                }
+            });
         })
         //put all the cards with ths cat
     });
 }
-filtering();
+
 function createing(displayName,cost , displayIcon){
     const container = document.querySelector(".container");
     container.insertAdjacentHTML("beforeend",
