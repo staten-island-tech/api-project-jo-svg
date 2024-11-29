@@ -12,11 +12,7 @@ async function getData(){
         else{
             const jsonResponse = await response.json();
             info = jsonResponse.data;
-            info.forEach((weapon)=>{
-                const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
-                const category = weapon.shopData ? weapon.shopData.category : 'no cat';
-                createing(weapon.displayName, cost, weapon.displayIcon);
-            });
+            putAllCards();
             filtering();
             
         }
@@ -26,8 +22,13 @@ async function getData(){
     }
 }
 
-//do weapons and then for each weapon you have the skins avaiuble wrdd 
-
+function putAllCards(){
+    info.forEach((weapon)=>{
+        const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
+        const category = weapon.shopData ? weapon.shopData.category : 'no cat';
+        createing(weapon.displayName, cost, weapon.displayIcon);
+    }) 
+}
 
 function createCards(displayName, cost, displayIcon, type){
     const container = document.querySelector(".container");
@@ -55,32 +56,33 @@ function createCards(displayName, cost, displayIcon, type){
 function filtering(){
     const join = document.querySelector('.join');
     const options = document.querySelectorAll('.join-item');
-   
-
     options.forEach(option => {
         option.addEventListener('click', ()=>{
             let topic = capitalizeFirstLetter(option.ariaLabel);
             console.log(topic);
-            
+            document.querySelector('.container').innerHTML = '';
             if (topic === 'All'){
-                info.forEach((weapon)=>{
-                    document.querySelector('.container').innerHTML = '';
-                    const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
-                    const category = weapon.shopData ? weapon.shopData.category : 'no cat';
-                    createing(weapon.displayName, cost, weapon.displayIcon);
-                }) 
+                putAllCards();
+            }
+            else if (topic === 'Smgs'){
+                putFilterCards('SMGs');
+            }
+            else{
+                putFilterCards(topic);
             }
             
-            info.forEach(weapon => {
-                document.querySelector('.container').innerHTML = '';
-                const category = weapon.shopData ? weapon.shopData.category : 'no cat'; 
-                if (category === topic){
-                    const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
-                    createing(weapon.displayName, cost, weapon.displayIcon);
-                }
-            });
         })
         //put all the cards with ths cat
+    });
+}
+
+function putFilterCards(cat){
+    info.forEach(weapon => {
+        const category = weapon.shopData ? weapon.shopData.category : 'no cat'; 
+        if (category === cat){
+            const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
+            createing(weapon.displayName, cost, weapon.displayIcon);
+        }
     });
 }
 
@@ -88,7 +90,6 @@ function createing(displayName,cost , displayIcon){
     const container = document.querySelector(".container");
     container.insertAdjacentHTML("beforeend",
         `<div class="card bg-base-100 w-96 shadow-xl h-32 flex cursor-pointer rounded-none overflow-x-hidden rounded-tl-lg border-2 border-black">
-          
             <div class="picture absolute h-24 z-10">
                 <img
                     src="${displayIcon}"
@@ -101,10 +102,7 @@ function createing(displayName,cost , displayIcon){
             <div class="cardText w-full flex items-center justify-center mt-auto">
                 <h2 class="card-title text-center text-gray-200">${displayName.toUpperCase()}</h2>
             </div>
-        </div>
-
-        `
-    );
+        </div>`);
 }
 function capitalizeFirstLetter(word) {
     return word
@@ -175,10 +173,6 @@ function createSkinPart(skin, slideId, prevSlideId, nextSlideId, weapon) {
         </div>
     `);
 }
-
-
-
-
 getData();
 
 weaponData();
