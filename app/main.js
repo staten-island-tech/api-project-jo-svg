@@ -130,7 +130,7 @@ document.addEventListener("click", (event) => {
                 const title = capitalizeFirstLetter(titleElement.textContent);
                 document.querySelector(".container").innerHTML = "";
                 weaponData(title);
-
+                
             }
         } else {
             console.log("Card not found!");
@@ -185,42 +185,42 @@ function createSkinPart(skin, slideId, prevSlideId, nextSlideId, weapon) {
 }
 function stats(weapon) {
     const container = document.querySelector('.container');
-
+    const fireRate = weapon.weaponStats.fireRate || 0;
+    const reloadTimeSeconds = weapon.weaponStats.reloadTimeSeconds || 0;
+    const equipTimeSeconds = weapon.weaponStats.equipTimeSeconds || 0;
+    const magazineSize = weapon.weaponStats.magazineSize || 0;
     container.insertAdjacentHTML("beforeend", `
         <div class="weapon-stats">
             <h1>${weapon.displayName} Stats</h1>
-            
-            <div class="stat">
-                <label for="damage">Damage</label>
-                <div class="progress-container">
-                    <progress id="damage" value="${weapon.damage}" max="100"></progress>
-                    <span class="stat-value">${weapon.damage}/100</span>
-                </div>
-            </div>
-            
-            <div class="stat">
-                <label for="accuracy">Accuracy</label>
-                <div class="progress-container">
-                    <progress id="accuracy" value="${weapon.accuracy}" max="100"></progress>
-                    <span class="stat-value">${weapon.accuracy}/100</span>
-                </div>
-            </div>
-            
             <div class="stat">
                 <label for="fireRate">Fire Rate</label>
                 <div class="progress-container">
-                    <progress id="fireRate" value="${weapon.fireRate}" max="100"></progress>
-                    <span class="stat-value">${weapon.fireRate}/100</span>
+                    <span class="stat-value">${fireRate}</span>
+                    <progress id="fire rate" value="${fireRate}" max="16"></progress>
+                </div>
+            </div>
+            <div class="stat">
+                <label for="reloadTimeSeconds">Reload Time</label>
+                <div class="progress-container">
+                    <span class="stat-value">${reloadTimeSeconds}</span>
+                    <progress id="reload time seconds" value="${reloadTimeSeconds}" max="5"></progress>
+                </div>
+            </div>
+            <div class="stat">
+                <label for="equipTimeSeconds">Equip Time</label>
+                <div class="progress-container">
+                    <span class="stat-value">${equipTimeSeconds}</span>
+                    <progress id="equip time seconds" value="${equipTimeSeconds}" max="1.25"></progress>
+                </div>
+            </div>
+            <div class="stat">
+                <label for="magazineSize">Magazine Size</label>
+                <div class="progress-container">
+                    <span class="stat-value">${magazineSize}</span>
+                    <progress id="magazine size" value="${magazineSize}" max="100"></progress>
                 </div>
             </div>
             
-            <div class="stat">
-                <label for="reloadSpeed">Reload Speed</label>
-                <div class="progress-container">
-                    <progress id="reloadSpeed" value="${weapon.reloadSpeed}" max="100"></progress>
-                    <span class="stat-value">${weapon.reloadSpeed}/100</span>
-                </div>
-            </div>
         </div>
     `);
 }
