@@ -21,7 +21,6 @@ async function getData(){
         alert("no work")
     }
 }
-
 function putAllCards(){
     info.forEach((weapon)=>{
         const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
@@ -29,7 +28,6 @@ function putAllCards(){
         createing(weapon.displayName, cost, weapon.displayIcon);
     }) 
 }
-
 function createCards(displayName, cost, displayIcon, type){
     const container = document.querySelector(".container");
     container.insertAdjacentHTML("beforeend",
@@ -54,7 +52,6 @@ function createCards(displayName, cost, displayIcon, type){
     );
 }
 function filtering(){
-    const join = document.querySelector('.join');
     const options = document.querySelectorAll('.join-item');
     options.forEach(option => {
         option.addEventListener('click', ()=>{
@@ -69,23 +66,34 @@ function filtering(){
             }
             else{
                 putFilterCards(topic);
-            }
-            
+            }  
         })
-        //put all the cards with ths cat
     });
 }
-
+function searching(){
+    const search = document.querySelector('.input');
+    const cards = document.querySelectorAll('.card');
+    const searchItem = search.value.toLowerCase();
+    cards.forEach(card =>{
+        const title = card.querySelector(".card-title").textContent.toLowerCase(); 
+        if (title.includes(searchItem)) {
+            card.classList.remove('hidden');
+        } else {
+            card.classList.add('hidden');
+        }
+    });
+}
+document.querySelector('.input').addEventListener('input', searching);
 function putFilterCards(cat){
     info.forEach(weapon => {
         const category = weapon.shopData ? weapon.shopData.category : 'no cat'; 
         if (category === cat){
             const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
             createing(weapon.displayName, cost, weapon.displayIcon);
+            stats(weapon);
         }
     });
 }
-
 function createing(displayName,cost , displayIcon){
     const container = document.querySelector(".container");
     container.insertAdjacentHTML("beforeend",
@@ -173,6 +181,49 @@ function createSkinPart(skin, slideId, prevSlideId, nextSlideId, weapon) {
         </div>
     `);
 }
+function stats(weapon) {
+    const container = document.querySelector('.container');
+
+    container.insertAdjacentHTML("beforeend", `
+        <div class="weapon-stats">
+            <h1>${weapon.displayName} Stats</h1>
+            
+            <div class="stat">
+                <label for="damage">Damage</label>
+                <div class="progress-container">
+                    <progress id="damage" value="${weapon.damage}" max="100"></progress>
+                    <span class="stat-value">${weapon.damage}/100</span>
+                </div>
+            </div>
+            
+            <div class="stat">
+                <label for="accuracy">Accuracy</label>
+                <div class="progress-container">
+                    <progress id="accuracy" value="${weapon.accuracy}" max="100"></progress>
+                    <span class="stat-value">${weapon.accuracy}/100</span>
+                </div>
+            </div>
+            
+            <div class="stat">
+                <label for="fireRate">Fire Rate</label>
+                <div class="progress-container">
+                    <progress id="fireRate" value="${weapon.fireRate}" max="100"></progress>
+                    <span class="stat-value">${weapon.fireRate}/100</span>
+                </div>
+            </div>
+            
+            <div class="stat">
+                <label for="reloadSpeed">Reload Speed</label>
+                <div class="progress-container">
+                    <progress id="reloadSpeed" value="${weapon.reloadSpeed}" max="100"></progress>
+                    <span class="stat-value">${weapon.reloadSpeed}/100</span>
+                </div>
+            </div>
+        </div>
+    `);
+}
+
 getData();
 
 weaponData();
+
