@@ -1,7 +1,6 @@
 import "./style.css";
 document.querySelector('.container').innerHTML = '';
 let info = [];
-
 async function getData(){
     try {
         const response = await fetch("https://valorant-api.com/v1/weapons/");
@@ -27,29 +26,6 @@ function putAllCards(){
         const category = weapon.shopData ? weapon.shopData.category : 'no cat';
         createing(weapon.displayName, cost, weapon.displayIcon);
     }) 
-}
-function createCards(displayName, cost, displayIcon, type){
-    const container = document.querySelector(".container");
-    container.insertAdjacentHTML("beforeend",
-        `<div class="card bg-base-100 w-96 shadow-xl h-96">
-            <figure class="px-10 pt-10">
-                <div class="p-6 rounded-xl" style="background: red; display: flex; justify-content: center; align-items: center; height: 100%;">
-                    <img
-                        src="${displayIcon}"
-                        alt="${displayName}"
-                        class="rounded-xl object-contain max-h-full max-w-full" />
-                </div>
-            </figure>
-            <div class="card-body items-center text-center">
-                <h2 class="card-title">${displayName}</h2>
-                <p>Cost: ${cost}</p>
-                <p>${type}</p>
-                <div class="card-actions">
-                    <button class="btn btn-primary">Learn More</button>
-                </div>
-            </div>
-        </div>`
-    );
 }
 function filtering(){
     const options = document.querySelectorAll('.join-item');
@@ -94,21 +70,18 @@ function putFilterCards(cat){
         }
     });
 }
-function createing(displayName,cost , displayIcon){
+function createing(displayName, cost, displayIcon){
     const container = document.querySelector(".container");
     container.insertAdjacentHTML("beforeend",
-        `<div class="card bg-base-100 w-96 shadow-xl h-32 flex cursor-pointer rounded-none overflow-x-hidden rounded-tl-lg border-2 border-black">
-            <div class="picture absolute h-24 z-10">
+        `<div class="card bg-base-100 w-96 shadow-xl h-32 flex cursor-pointer rounded-none overflow-x-hidden" style="background: rgba(255, 255, 255, 0.3)">
+            <div class="cardText w-full flex items-center justify-center bg-black">
+                <h2 class="card-title text-center text-gray-200">${displayName.toUpperCase()}</h2>
+            </div>
+            <div class="picture h-24 z-10">
                 <img
                     src="${displayIcon}"
                     alt="${displayName}"
                     class="object-contain max-h-full max-w-full" />
-            </div>
-            <div class="w-20 h-20 absolute bottom-0 " style="background-color: rgb(255, 70, 86);">
-                <h3 class="z-0">${cost}</h3>
-            </div>
-            <div class="cardText w-full flex items-center justify-center mt-auto">
-                <h2 class="card-title text-center text-gray-200">${displayName.toUpperCase()}</h2>
             </div>
         </div>`);
 }
