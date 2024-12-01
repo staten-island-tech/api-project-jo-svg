@@ -90,7 +90,7 @@ function putFilterCards(cat){
         if (category === cat){
             const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
             createing(weapon.displayName, cost, weapon.displayIcon);
-            stats(weapon);
+            
         }
     });
 }
@@ -130,6 +130,7 @@ document.addEventListener("click", (event) => {
                 const title = capitalizeFirstLetter(titleElement.textContent);
                 document.querySelector(".container").innerHTML = "";
                 weaponData(title);
+
             }
         } else {
             console.log("Card not found!");
@@ -150,6 +151,7 @@ async function weaponData(title) {
             const nextSlideId = `slide${index === skins.length - 1 ? 1 : index + 2}`;
             createSkinPart(skin, slideId, prevSlideId, nextSlideId);
         });
+        stats(weapon)
     }
 }
 
