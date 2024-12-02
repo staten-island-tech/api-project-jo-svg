@@ -4,7 +4,6 @@ let info = [];
 async function getData(){
     try {
         const response = await fetch("https://valorant-api.com/v1/weapons/");
-        //this is valorant weapon skins
         if (response.status != 200){
             throw new Error('failed to catch data');
         }
@@ -66,7 +65,6 @@ function putFilterCards(cat){
         if (category === cat){
             const cost = weapon.shopData ? weapon.shopData.cost : 'no cost';
             createing(weapon.displayName, cost, weapon.displayIcon);
-            
         }
     });
 }
@@ -101,7 +99,7 @@ document.addEventListener("click", (event) => {
             const titleElement = card.querySelector(".card-title");
             if (titleElement) {
                 const title = capitalizeFirstLetter(titleElement.textContent);
-                document.querySelector(".container").innerHTML = "";
+                document.querySelector(".imageStats").innerHTML = "";
                 weaponData(title);
                 
             }
@@ -110,7 +108,6 @@ document.addEventListener("click", (event) => {
         }
     }
 });
-
 async function weaponData(title) {
     const weapon = info.find((w) => w.displayName === title);
     if (weapon) {
@@ -171,11 +168,10 @@ async function weaponData(title) {
         stats(weapon);
     }
 }
-
 function createOpenCard() {
-    const container = document.querySelector(".container");
-    container.insertAdjacentHTML("beforeend", `
-        <div class="carousel" style="width: 40rem;"></div>
+    const imageStats = document.querySelector(".imageStats");
+    imageStats.insertAdjacentHTML("beforeend", `
+        <div class="carousel w-72"</div>
     `);
 }
 function createSkinPart(skin, slideId, prevSlideId, nextSlideId) {
@@ -185,60 +181,59 @@ function createSkinPart(skin, slideId, prevSlideId, nextSlideId) {
     const carousel = document.querySelector(".carousel");
     const skinIcon = skin.displayIcon || "https://via.placeholder.com/150"; 
     carousel.insertAdjacentHTML("beforeend", `
-        <div id="${slideId}" class="carousel-item relative flex justify-center items-center w-full">
-            <div class="flex justify-center items-center h-96">
+        <div id="${slideId}" class="carousel-item relative flex flex-col justify-center items-center w-full">
+            <div class="flex items-center justify-center bg-black w-full h-10">
+                <h2 class="font-bold text-orange-500 uppercase tracking-wide text-lg leading-none text-center">
+                    ${skin.displayName}
+                </h2>
+            </div>
+            <div class="flex justify-center items-center h-48">
                 <img
                     src="${skinIcon}"
-                    class="object-contain"
-                    style="max-width: 80%; max-height: 80%; border-radius: 8px;" 
+                    class="object-cover rounded-lg w-full"
                     alt="${skin.displayName}"
                     />
             </div>
-            <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                <a href="#${prevSlideId}" class="btn btn-circle">❮</a>
-                <a href="#${nextSlideId}" class="btn btn-circle">❯</a>
+            <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 justify-between items-center">
+                <a href="#${prevSlideId}" class="btn btn-circle bg-transparent border-0 text-white mr-[1rem]">❮</a>
+                <a href="#${nextSlideId}" class="btn btn-circle bg-transparent border-0 text-white ml-[1rem]">❯</a>
             </div>
+
         </div>
     `);
 }
 function stats(weapon) {
-    const container = document.querySelector('.container');
+    const imageStats = document.querySelector('.imageStats');
     const fireRate = weapon.weaponStats.fireRate || 0;
     const reloadTimeSeconds = weapon.weaponStats.reloadTimeSeconds || 0;
     const equipTimeSeconds = weapon.weaponStats.equipTimeSeconds || 0;
     const magazineSize = weapon.weaponStats.magazineSize || 0;
-    container.insertAdjacentHTML("beforeend", `
-        <div class="weapon-stats">
-            <h1>${weapon.displayName} Stats</h1>
-            <div class="stat">
-                <label for="fireRate">Fire Rate</label>
-                <div class="progress-container">
-                    <span class="stat-value">${fireRate}</span>
-                    <progress id="fire rate" value="${fireRate}" max="16"></progress>
+    imageStats.insertAdjacentHTML("beforeend", `
+       <div class="weapon-stats flex flex-col gap-y-0.5">
+            <div class="stat flex flex-col text-white h-8">
+                <label for="fireRate" class="w-28 text-left">Fire Rate</label>
+                <div class="progress-container flex items-center">
+                    <progress id="fire-rate" value="${fireRate}" max="16" class="w-72 h-2"></progress>
                 </div>
             </div>
-            <div class="stat">
-                <label for="reloadTimeSeconds">Reload Time</label>
-                <div class="progress-container">
-                    <span class="stat-value">${reloadTimeSeconds}</span>
-                    <progress id="reload time seconds" value="${reloadTimeSeconds}" max="5"></progress>
+            <div class="stat flex flex-col text-white h-8">
+                <label for="reloadTimeSeconds" class="w-28 text-left">Reload Time</label>
+                <div class="progress-container flex items-center">
+                    <progress id="reload-time-seconds" value="${reloadTimeSeconds}" max="5" class="w-72 h-2"></progress>
                 </div>
             </div>
-            <div class="stat">
-                <label for="equipTimeSeconds">Equip Time</label>
-                <div class="progress-container">
-                    <span class="stat-value">${equipTimeSeconds}</span>
-                    <progress id="equip time seconds" value="${equipTimeSeconds}" max="1.25"></progress>
+            <div class="stat flex flex-col text-white h-8">
+                <label for="equipTimeSeconds" class="w-28 text-left">Equip Time</label>
+                <div class="progress-container flex items-center">
+                    <progress id="equip-time-seconds" value="${equipTimeSeconds}" max="1.25" class="w-72 h-2"></progress>
                 </div>
             </div>
-            <div class="stat">
-                <label for="magazineSize">Magazine Size</label>
-                <div class="progress-container">
-                    <span class="stat-value">${magazineSize}</span>
-                    <progress id="magazine size" value="${magazineSize}" max="100"></progress>
-                </div>
+            <div class="stat flex flex-col text-white h-8">
+                <label for="magazineSize" class="w-28 text-left">Magazine Size</label>
+                <div class="progress-container flex items-center ">
+                    <progress id="magazine-size" value="${magazineSize}" max="100" class="w-72 h-2"></progress>
+                </div>  
             </div>
-            
         </div>
     `);
 }

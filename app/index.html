@@ -6,67 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
-  <body class="bg-[url('/img/background.jpg')] bg-no-repeat bg-cover bg-fixed">
+  <body class="bg-[url('/img/image.png')] bg-no-repeat bg-cover bg-fixed min-h-screen">
     <div class="navbar bg-base-100">
       <div class="flex-1">
         <a class="btn btn-ghost text-xl">Valorant</a>
       </div>
       <div class="flex-none gap-2">
         <div class="form-control">
-          <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+          <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto mr-10" />
         </div>
       </div>
     </div>
-    <div class="join rounded-none">
-      <input
-        class="join-item btn text-white bg-[rgb(29,32,37)] appearance-none peer-checked:bg-[rgb(157,160,165)] peer-checked:ring-0 peer-checked:border-none"
+    <div class="flex">
+      <div class="join rounded-none flex flex-col w-56 gap-2 ml-14 my-auto">
+        <input
+          class="join-item btn text-white bg-[rgb(29,32,37)]"
+          type="radio"
+          name="options"
+          aria-label="ALL"
+          checked="checked"
+          style="outline: none;" />
+        <input
+          class="join-item btn text-white bg-[rgb(29,32,37)]"
+          type="radio"
+          name="options"
+          aria-label="RIFLES"
+          style="outline: none;" />
+        <input
+          class="join-item btn text-white bg-[rgb(29,32,37)]"
+          type="radio"
+          name="options"
+          aria-label="HEAVY WEAPONS"
+          style="outline: none;" />
+        <input
+          class="join-item btn text-white bg-[rgb(29,32,37)] "
+          type="radio"
+          name="options"
+          aria-label="SHOTGUNS"
+          style="outline: none;" />
+        <input
+          class="join-item btn text-white bg-[rgb(29,32,37)]"
+          type="radio"
+          name="options"
+          aria-label="PISTOLS"
+          style="outline: none;" />
+        <input
+          class="join-item btn text-white bg-[rgb(29,32,37)]"
+          type="radio"
+          name="options"
+          aria-label="SNIPER RIFLES"
+          style="outline: none;" />
+        <input
+          class="join-item btn text-white bg-[rgb(29,32,37)]"
+          type="radio"
+          name="options"
+          aria-label="SMGS"
+          style="outline: none;" />
+      </div>
+      <div class="absolute ml-8 mt-12 w-11/12 text-white flex w-56 bg-transparent text-center justify-center h-12">
+        <input
+        class=" btn text-white bg-[rgb(29,32,37)] rounded-none w-48"
         type="radio"
         name="options"
-        aria-label="ALL"
-        checked="checked"
+        aria-label="EQUIPMENTS"
         style="outline: none;" />
-      <input
-        class="join-item btn text-white bg-[rgb(29,32,37)] appearance-none peer-checked:bg-[rgb(157,160,165)] peer-checked:ring-0 peer-checked:border-none"
+        <input
+        class=" btn text-white bg-[rgb(29,32,37)] rounded-none w-48"
         type="radio"
         name="options"
-        aria-label="RIFLES"
+        aria-label="WEAPON SKINS"
         style="outline: none;" />
-      <input
-        class="join-item btn text-white bg-[rgb(29,32,37)] appearance-none peer-checked:bg-[rgb(157,160,165)] peer-checked:ring-0 peer-checked:border-none"
+        <input
+        class=" btn text-white bg-[rgb(29,32,37)] rounded-none w-48"
         type="radio"
         name="options"
-        aria-label="HEAVY WEAPONS"
+        aria-label="CHARACTER SKINS"
         style="outline: none;" />
-      <input
-        class="join-item btn text-white bg-[rgb(29,32,37)] appearance-none peer-checked:bg-[rgb(157,160,165)] peer-checked:ring-0 peer-checked:border-none"
-        type="radio"
-        name="options"
-        aria-label="SHOTGUNS"
-        style="outline: none;" />
-      <input
-        class="join-item btn text-white bg-[rgb(29,32,37)] appearance-none peer-checked:bg-[rgb(157,160,165)] peer-checked:ring-0 peer-checked:border-none"
-        type="radio"
-        name="options"
-        aria-label="PISTOLS"
-        style="outline: none;" />
-      <input
-        class="join-item btn text-white bg-[rgb(29,32,37)] appearance-none peer-checked:bg-[rgb(157,160,165)] peer-checked:ring-0 peer-checked:border-none"
-        type="radio"
-        name="options"
-        aria-label="SNIPER RIFLES"
-        style="outline: none;" />
-      <input
-        class="join-item btn text-white bg-[rgb(29,32,37)] appearance-none peer-checked:bg-[rgb(157,160,165)] peer-checked:ring-0 peer-checked:border-none"
-        type="radio"
-        name="options"
-        aria-label="SMGS"
-        style="outline: none;" />
+      </div>
+      <div class="container mt-32 mx-auto w-96 h-96 flex flex-wrap justify-evenly items-center pr-2 gap-2.5 overflow-y-scroll scrollbar-thin scrollbar-thumb-orange-500 scrollbar-track-transparent">
+          
+      </div>
+      <style>
+        .card.hidden {
+            display: none;
+        }
+      </style>
+      <div class="imageStats w-1/4 h-96 my-auto" style="background: rgba(0,0,0,0.2)">
+  
+      </div>
     </div>
-    <div class="container mx-auto my-8 w-11/12 flex flex-wrap justify-evenly items-center gap-2.5">
-      
-    </div>
+    
     <script type="module" src="/main.js"></script>
   </body>
 </html>
-
-<!-- youre valorant now  -->
