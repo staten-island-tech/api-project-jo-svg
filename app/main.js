@@ -171,7 +171,7 @@ async function weaponData(title) {
 function createOpenCard() {
     const imageStats = document.querySelector(".imageStats");
     imageStats.insertAdjacentHTML("beforeend", `
-        <div class="carousel w-72"</div>
+        <div class="carousel w-full"</div>
     `);
 }
 function createSkinPart(skin, slideId, prevSlideId, nextSlideId) {
