@@ -7,16 +7,16 @@
     <title>Vite App</title>
   </head>
   <body class="bg-[url('/img/image.png')] bg-no-repeat bg-cover bg-fixed min-h-screen">
-    <div class="navbar bg-base-100">
-      <div class="flex-1">
-        <a class="btn btn-ghost text-xl">Valorant</a>
-      </div>
+    <nav class="flex">
+      <h2 class="text-yellow-200 ml-10 mt-5">
+        SELECT WEAPON
+      </h2>
       <div class="flex-none gap-2">
         <div class="form-control">
-          <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto mr-10" />
+          <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto mx-auto absolute" />
         </div>
       </div>
-    </div>
+    </nav>
     <div class="flex">
       <div class="join rounded-none flex flex-col w-1/4 gap-2 ml-14 my-auto">
         <input
@@ -64,36 +64,30 @@
           style="outline: none;" />
       </div>
       <div class="absolute mt-12 w-full text-white flex bg-transparent text-center justify-center h-12">
-        <input
-        class=" btn text-white bg-[rgb(29,32,37)] rounded-none w-48"
-        type="radio"
-        name="options"
-        aria-label="EQUIPMENTS"
-        style="outline: none;" />
-        <input
-        class=" btn text-white bg-[rgb(29,32,37)] rounded-none w-48"
-        type="radio"
-        name="options"
-        aria-label="WEAPON SKINS"
-        style="outline: none;" />
-        <input
-        class=" btn text-white bg-[rgb(29,32,37)] rounded-none w-48"
-        type="radio"
-        name="options"
-        aria-label="CHARACTER SKINS"
-        style="outline: none;" />
+        <button class="btn text-white bg-[rgb(29,32,37)] rounded-none w-48">
+          EQUIPMENTS
+        </button>
+        <button class="btn text-white bg-[rgb(29,32,37)] rounded-none w-48">
+          WEAPON SKINS
+        </button>
+        <button class="btn text-white bg-[rgb(29,32,37)] rounded-none w-48">
+          CHARACTER SKINS
+        </button>
       </div>
       <div class="container mt-32 mx-auto w-96 h-96 flex flex-wrap justify-evenly items-center pr-2 gap-2.5 overflow-y-scroll scrollbar-thin scrollbar-thumb-orange-500 scrollbar-track-transparent">
-          
       </div>
       <style>
         .card.hidden {
             display: none;
         }
+        #magazine-size::-webkit-progress-value,
+        #equip-time-seconds::-webkit-progress-value,
+        #reload-time-seconds::-webkit-progress-value,
+        #fire-rate::-webkit-progress-value {
+          background-color: white; /* Progress bar color */
+        }
       </style>
-      <div class="imageStats w-1/4 h-96 my-auto" style="background: rgba(0,0,0,0.2)">
-  
-      </div>
+      <div class="imageStats w-1/4 h-96 my-auto" style="background: rgba(0,0,0,0.2)"> </div>
     </div>
     
     <script type="module" src="/main.js"></script>
