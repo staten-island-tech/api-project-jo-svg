@@ -7,74 +7,64 @@
     <title>Vite App</title>
   </head>
   <body class="bg-[url('/img/image.png')] bg-no-repeat bg-cover bg-fixed min-h-screen">
-    <nav class="flex">
-      <h2 class="text-yellow-200 ml-10 mt-5">
-        SELECT WEAPON
-      </h2>
+    <div class="navbar bg-base-100">
+      <div class="flex-1">
+        <a class="btn btn-ghost text-xl">Valorant</a>
+      </div>
       <div class="flex-none gap-2">
         <div class="form-control">
-          <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto mx-auto absolute" />
+          <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto mr-7" />
         </div>
       </div>
-    </nav>
-    <div class="flex">
-      <div class="join rounded-none flex flex-col w-1/4 gap-2 ml-14 my-auto">
+    </div>
+    <div class="flex flex-col">
+      <div class="imageStats w-full h-96 mt-7" > </div>
+      <div class="join rounded-none flex flex-row flex-wrap w-3/4 justify-evenly self-center mt-20">
         <input
-          class="join-item btn text-white bg-[rgb(29,32,37)]"
+          class="join-item btn text-white w-32 bg-[rgb(29,32,37)]"
           type="radio"
           name="options"
-          aria-label="ALL"
+          aria-label="MELEE"
           checked="checked"
           style="outline: none;" />
         <input
-          class="join-item btn text-white bg-[rgb(29,32,37)]"
+          class="join-item btn text-white w-32 bg-[rgb(29,32,37)]"
           type="radio"
           name="options"
           aria-label="RIFLES"
           style="outline: none;" />
         <input
-          class="join-item btn text-white bg-[rgb(29,32,37)]"
+          class="join-item btn text-white w-32 bg-[rgb(29,32,37)]"
           type="radio"
           name="options"
           aria-label="HEAVY WEAPONS"
           style="outline: none;" />
         <input
-          class="join-item btn text-white bg-[rgb(29,32,37)] "
+          class="join-item btn text-white w-32 bg-[rgb(29,32,37)] "
           type="radio"
           name="options"
           aria-label="SHOTGUNS"
           style="outline: none;" />
         <input
-          class="join-item btn text-white bg-[rgb(29,32,37)]"
+          class="join-item btn text-white w-32 bg-[rgb(29,32,37)]"
           type="radio"
           name="options"
           aria-label="PISTOLS"
           style="outline: none;" />
         <input
-          class="join-item btn text-white bg-[rgb(29,32,37)]"
+          class="join-item btn text-white w-32 bg-[rgb(29,32,37)]"
           type="radio"
           name="options"
           aria-label="SNIPER RIFLES"
           style="outline: none;" />
         <input
-          class="join-item btn text-white bg-[rgb(29,32,37)]"
+          class="join-item btn text-white w-32 bg-[rgb(29,32,37)]"
           type="radio"
           name="options"
           aria-label="SMGS"
           style="outline: none;" />
       </div>
-      <div class="absolute mt-12 w-full text-white flex bg-transparent text-center justify-center h-12">
-        <button class="btn text-white bg-[rgb(29,32,37)] rounded-none w-48">
-          EQUIPMENTS
-        </button>
-        <button class="btn text-white bg-[rgb(29,32,37)] rounded-none w-48">
-          WEAPON SKINS
-        </button>
-        <button class="btn text-white bg-[rgb(29,32,37)] rounded-none w-48">
-          CHARACTER SKINS
-        </button>
-      </div>
-      <div class="container mt-32 mx-auto w-96 h-96 flex flex-wrap justify-evenly items-center pr-2 gap-2.5 overflow-y-scroll scrollbar-thin scrollbar-thumb-orange-500 scrollbar-track-transparent">
+      <div class="container mt-10 mx-auto w-fit h-56 flex flex-wrap justify-center items-center gap-2.5 overflow-x-scroll scrollbar-track-transparent">
       </div>
       <style>
         .card.hidden {
@@ -87,9 +77,9 @@
           background-color: white; /* Progress bar color */
         }
       </style>
-      <div class="imageStats w-1/4 h-96 my-auto" style="background: rgba(0,0,0,0.2)"> </div>
+      
     </div>
-    
+
     <script type="module" src="/main.js"></script>
   </body>
 </html>

@@ -12,7 +12,7 @@ async function getData(){
             info = jsonResponse.data;
             putAllCards();
             filtering();
-            
+            weaponData('Odin');
         }
     } catch (error) {
         console.log(error);
@@ -28,13 +28,15 @@ function putAllCards(){
 }
 function filtering(){
     const options = document.querySelectorAll('.join-item');
+    
     options.forEach(option => {
         option.addEventListener('click', ()=>{
             let topic = capitalizeFirstLetter(option.ariaLabel);
             console.log(topic);
+            
             document.querySelector('.container').innerHTML = '';
-            if (topic === 'All'){
-                putAllCards();
+            if (topic === 'Melee'){
+                putFilterCards('no cat');
             }
             else if (topic === 'Smgs'){
                 putFilterCards('SMGs');
@@ -70,18 +72,20 @@ function putFilterCards(cat){
 }
 function createing(displayName, cost, displayIcon){
     const container = document.querySelector(".container");
+    
     container.insertAdjacentHTML("beforeend",
-        `<div class="card bg-base-100 w-96 shadow-xl h-32 flex cursor-pointer rounded-none overflow-x-hidden" style="background: rgba(255, 255, 255, 0.3)">
+        ` <div class="card w-96 h-32 flex cursor-pointer rounded-none overflow-x-hidden bg-white/30 shadow-xl">
             <div class="cardText w-full flex items-center justify-center bg-black">
                 <h2 class="card-title text-center text-gray-200">${displayName.toUpperCase()}</h2>
             </div>
-            <div class="picture h-24 z-10">
+            <div class="picture h-24 w-full flex justify-center items-center">
                 <img
                     src="${displayIcon}"
                     alt="${displayName}"
                     class="object-contain max-h-full max-w-full" />
             </div>
-        </div>`);
+        </div>`
+    );
 }
 function capitalizeFirstLetter(word) {
     return word
@@ -165,7 +169,14 @@ async function weaponData(title) {
             const nextSlideId = `slide${index === filteredSkins.length - 1 ? 1 : index + 2}`; 
             createSkinPart(skin, slideId, prevSlideId, nextSlideId);
         });
-        stats(weapon);
+        const category = weapon.shopData ? weapon.shopData.category : 'no cat';
+        if (category == 'no cat'){
+            return;
+        }
+        else{
+            stats(weapon);
+        }
+        
     }
 }
 function createOpenCard() {
@@ -182,7 +193,7 @@ function createSkinPart(skin, slideId, prevSlideId, nextSlideId) {
     const skinIcon = skin.displayIcon || "https://via.placeholder.com/150"; 
     carousel.insertAdjacentHTML("beforeend", `
         <div id="${slideId}" class="carousel-item relative flex flex-col justify-center items-center w-full">
-            <div class="flex items-center justify-center bg-black w-full h-10">
+            <div class="flex items-center justify-center w-full h-10">
                 <h2 class="font-bold text-orange-500 uppercase tracking-wide text-lg leading-none text-center">
                     ${skin.displayName}
                 </h2>
@@ -190,7 +201,7 @@ function createSkinPart(skin, slideId, prevSlideId, nextSlideId) {
             <div class="flex justify-center items-center h-48">
                 <img
                     src="${skinIcon}"
-                    class="object-cover rounded-lg w-full"
+                    class="object-cover rounded-lg w-full max-h-40"
                     alt="${skin.displayName}"
                     />
             </div>
@@ -209,7 +220,7 @@ function stats(weapon) {
     const equipTimeSeconds = weapon.weaponStats.equipTimeSeconds || 0;
     const magazineSize = weapon.weaponStats.magazineSize || 0;
     imageStats.insertAdjacentHTML("beforeend", `
-       <div class="weapon-stats flex flex-col gap-y-0.5">
+       <div class="weapon-stats flex flex-col gap-y-0.5 ml-10">
             <div class="stat flex flex-col text-white h-8">
                 <label for="fireRate" class="w-28 text-left">Fire Rate</label>
                 <div class="progress-container flex items-center">
